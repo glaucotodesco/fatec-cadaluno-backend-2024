@@ -1,3 +1,5 @@
+
+
 package com.fatec.student.resources.exceptions;
 
 import java.time.Instant;
@@ -8,7 +10,7 @@ public class StandardError {
     private String error;
     private String message;
     private String path;
-    
+
     public Instant getTimeStamp() {
         return timeStamp;
     }
