@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,6 +23,7 @@ import com.fatec.student.dto.StudentResponse;
 import com.fatec.student.services.StudentService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("students")
 public class StudentController {
 
@@ -45,7 +47,7 @@ public class StudentController {
   }
 
   @PostMapping
-  public ResponseEntity<StudentResponse> save(@RequestBody StudentRequest student){
+  public ResponseEntity<StudentResponse> save(@Validated @RequestBody StudentRequest student){
     StudentResponse newStudent = this.studentService.save(student);
 
     URI location = ServletUriComponentsBuilder
@@ -58,7 +60,7 @@ public class StudentController {
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<Void> update(@PathVariable int id, @RequestBody StudentRequest student){
+  public ResponseEntity<Void> update(@PathVariable int id, @Validated @RequestBody StudentRequest student){
       this.studentService.update(id, student);
       return ResponseEntity.ok().build();
   }
